@@ -1,6 +1,7 @@
 import json
 
 from odoo.tests import tagged
+from odoo.tools import html2plaintext
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
@@ -74,8 +75,8 @@ class TestAccountIncomingSupplierInvoice(AccountTestInvoicingCommon):
             len(message_ids), 1, "Only one message should be posted in the chatter"
         )
         self.assertEqual(
-            message_ids.body,
-            "<p>Vendor Bill Created</p>",
+            html2plaintext(message_ids.body),
+            "Vendor Bill Created",
             "Only the invoice creation should be posted",
         )
 
